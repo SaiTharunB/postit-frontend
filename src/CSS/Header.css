@@ -1,0 +1,13 @@
+.custom-nav{
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background-color: black;
+}
+
+.brand{
+    padding-left: 10px;
+    font-size: 36px;
+    font-weight: 650;
+    font-family: 'OCR A Std', 'monospace';
+    color:white
+}
