@@ -1,10 +1,10 @@
 import React from 'react'
 import "../CSS/Login.css"
-import {Link, useNavigate} from "react-router-dom"
+import {Link} from "react-router-dom"
 import { useState } from 'react'
 import { saveUser } from './AuthManager'
 
-const Login = ({setuserdetails}) => {
+const Login = () => {
 
   const [data,setData] = useState({
     username:'',
@@ -27,7 +27,7 @@ const Login = ({setuserdetails}) => {
       }
       else 
       {
-        console.log(data)
+        // console.log(data)
         await loginUser()
       }
   }
@@ -42,9 +42,9 @@ const Login = ({setuserdetails}) => {
       })
         .then((response) => response.text())
         .then((resp) => {
-          console.log('Login Succesful');
-          console.log(resp)
-          let obj={username:data.username,token:resp,isLoggedIn:true}
+          // console.log('Login Succesful');
+          // console.log(resp)
+          let obj={username:data.username,token:resp}
           saveUser(obj)
           window.location.reload(false);
         })
@@ -58,7 +58,7 @@ const Login = ({setuserdetails}) => {
       <div >
          <img className='logo img-fluid' src="postitlogo.svg" alt="PostIt LOGO"/>
       </div>
-      <div className="card text-center">
+      <div className="card text-center custom-card">
         <div className="card-body login-body">
           <h2 className="card-title login-title">Login to your account</h2>
          
@@ -72,7 +72,7 @@ const Login = ({setuserdetails}) => {
           </div>
           <button type="button" className="btn btn-dark login-btn" onClick={()=>clickHandler()}>Login</button>
         </div>
-        <div className="card-footer text-muted">
+        <div className="card-footer login-card-footer text-muted">
             New to PostIt? <Link to="/signup" replace>Sign Up</Link>
           </div>
       </div>

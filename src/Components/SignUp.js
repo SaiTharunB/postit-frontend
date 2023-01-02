@@ -35,7 +35,7 @@ const SignUp = () => {
       }
       else 
       {
-        console.log(data)
+        // console.log(data)
         await saveUser()
       }
   }
@@ -50,7 +50,7 @@ const SignUp = () => {
       })
         .then((response) => response.json())
         .then((resp) => {
-          console.log('SignUp Succesful');
+          // console.log('SignUp Succesful');
           navigate("/")
         })
         .catch((error) => {
@@ -65,9 +65,9 @@ const SignUp = () => {
       <div >
          <img className='logo img-fluid' src="postitlogo.svg" alt="PostIt LOGO"/>
       </div>
-      <div className="card text-center">
-        <div className="card-body">
-          <h3 className="card-title">Sign Up</h3>
+      <div className="card text-center custom-card">
+        <div className="card-body custom-card-body">
+          <h3 className="card-title custom-title">Sign Up</h3>
           <div className="mb-3">
             <label  className="form-label">Username</label>
             <input type="text" name="name" className="form-control"  placeholder="john doe" required="required" onChange={changeHandler}/>

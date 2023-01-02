@@ -1,29 +1,35 @@
 import React from 'react'
 import "../CSS/Header.css"
-import {isLoggedIn}  from './AuthManager';
+import { Link, useNavigate} from 'react-router-dom';
+
 
 const Header = () => {
+  const navigate=useNavigate()
+  const logout = () =>{
+    sessionStorage.clear("userDetails")
+    navigate("/")
+  }
   return (
     <div>
-        {
-            isLoggedIn() ?
-            <nav class="navbar navbar-expand-lg  custom-nav">
-  <div class="container-fluid">
-    <a class="navbar-brand brand" href="/">PostIt</a>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-
-      </ul>
-        <button class="btn btn-outline-success" type="submit">LogOut</button>
-    </div>
-  </div>
-</nav>:
-            <nav class="navbar navbar-expand-lg  custom-nav">
-  <div class="container-fluid">
-    <a class="navbar-brand brand" href="/">PostIt</a>
-  </div>
-</nav>
-        }
+    <nav className="navbar navbar-expand-sm  custom-nav">
+      <div className="container-fluid">
+        <div className="navbar-brand brand" >
+        <img  className ="brand-logo img-fluid" src="hlogo.svg" alt="logo"/>
+        <Link className="navbar-brand brand" to="/">PostIt</Link>
+        </div>
+        <div className="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+          <li className="nav-item">
+              <Link className="nav-link link" to="/post">Create Post</Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link link" to="/myposts">My Posts</Link>
+            </li>
+          </ul>
+            <button className="btn btn-danger" type="button" onClick={()=>logout()}>Logout</button>
+        </div>
+      </div>
+    </nav>
         
     </div>
   )

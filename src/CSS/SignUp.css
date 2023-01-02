@@ -1,0 +1,21 @@
+.custom-title{
+    margin-top: 0px;
+}
+
+.custom-card-body{
+    padding-top:0px;
+}
+
+.create-post-container{
+    padding-top: 3%;
+    max-width:60%;
+}
+
+.text-area{
+    height: 100%;
+}
+
+.post-btn{
+    background-color: #010203;
+    font-size:16px;
+}
