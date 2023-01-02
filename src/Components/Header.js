@@ -8,6 +8,7 @@ const Header = () => {
   const logout = () =>{
     sessionStorage.clear("userDetails")
     navigate("/")
+    window.location.reload(false)
   }
   return (
     <div>
