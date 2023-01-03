@@ -5,10 +5,17 @@ import Modal from 'react-bootstrap/Modal';
 import { BsChatRight } from 'react-icons/bs';
 import { getUserDetails } from './AuthManager';
 import { BsHandThumbsUp, BsHandThumbsUpFill } from 'react-icons/bs';
+import {AiOutlineDelete} from "react-icons/ai"
+import Error from "./Error"
 import "../CSS/Home.css"
+
+
 
 const Comments = (props) =>  {
   const [show, setShow] = useState(false);
+  const [showError,setShowError] = useState(false)
+  const [msg,setMsg] = useState('')
+
   const handleClose = () => {
     setShow(false);
     window.location.reload(false)
@@ -98,6 +105,26 @@ const fetchComments = async()=>{
     })
   }
 
+  const deleteComment = async(id) =>{
+    await  fetch("http://150.136.139.228:8080/comment/"+id, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        'username':userDetails.username,
+        'token':userDetails.token
+      }
+    }).then(response=>response.text())
+    .then(resp=>{
+      if(resp!==''){
+        setMsg('Failed to delete comment')
+        setShowError(true)
+      } 
+      else{
+        setComments(comments.filter(comm=>comm.id!==id))
+      }
+    })
+  }
+
 const changeHandler = (e) =>{
     setComment({...comment,[e.target.name]:e.target.value})
 }
@@ -136,7 +163,7 @@ const changeHandler = (e) =>{
                        }
                          </span>
                       <span>{comm.likes}</span>
-            
+                      <button className="like-btn" onClick={()=>deleteComment(comm.id)}><AiOutlineDelete size="18px"/></button>
                        </div>
                  </div>
                          </div>
@@ -150,6 +177,10 @@ const changeHandler = (e) =>{
                           </div>:
                           <div></div>
             }
+                  {showError ?
+      <Error msg={msg}/>:
+      <div></div>
+}
          </div>
           <Form>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
@@ -169,7 +200,7 @@ const changeHandler = (e) =>{
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button  bsClass="comm-btn" onClick={()=>addComment()}>
+          <Button  onClick={()=>addComment()}>
             Comment
           </Button>
         </Modal.Footer>
