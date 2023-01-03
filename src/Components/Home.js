@@ -4,20 +4,24 @@ import Comments from "./Comments"
 import Hoc from "./Hoc"
 import "../CSS/Home.css"
 import { getUserDetails } from './AuthManager'
-import { BsChatRight, BsHandThumbsUp, BsHandThumbsUpFill } from "react-icons/bs";
+import { BsHandThumbsUp, BsHandThumbsUpFill } from "react-icons/bs";
+// import {connect} from "react-redux"
+// import commentsreducer from "../Reducer/commentsreducer"
 
 const Home = () => {
   const [posts,setPosts] = useState([])
+  const [loading,setLoading] = useState(true)
   const [noOfElements,setNoOfElements] = useState(0)
   const [noOfPages,setNoOfPages] = useState(0)
   const flag=false
   const userDetails = getUserDetails()
-  // const commentsIcon = String.fromCodePoint(#xf27a)
+
   const respHandler = (response) =>{
     setPosts(response.content)
     setNoOfElements(response.totalElements)
     setNoOfPages(response.totalPages)
   }
+
   useEffect(() => {
     const fetchData = async () => {
       await fetch("http://150.136.139.228:8080/post",
@@ -57,9 +61,7 @@ const Home = () => {
     })
   }
 
-  const commentViewHandler = (id) =>{
-      return <Comments/>
-  }
+  setTimeout(() => setLoading(false), 5000);
 
   const getDate = (date) =>{
     let temp= date.split("T")
@@ -75,7 +77,7 @@ const Home = () => {
             <div className="row">
              {
              posts.map((post)=>(
-              <div className='post-view-row'>
+              <div className='post-view-row' key={post.id}>
           <div className="card text-center post-view-card">
           <div className="card-body post-view-body">
             <h2 className="card-title post-title">{post.title}</h2>
@@ -90,7 +92,7 @@ const Home = () => {
             }
               </span>
            <span>{post.likes}</span>
-          <span><Comments id={post.id}/></span><span>{post.noOfComments} comments</span>
+          <span><Comments id={post.id} key={post.id}/></span><span>{post.noOfComments} comments</span>
             </div>
       </div>
               </div>
@@ -98,13 +100,22 @@ const Home = () => {
               }
             </div>
         :
+        loading ?
             <div className="spinner-border text-dark spin-center" role="status">
               <span className="visually-hidden">Loading...</span>
+            </div> :
+            <div>
+              No Posts Found
             </div>
           }
           </div>
         </div> 
   )
 }
+
+// const mapStateToProps = (state)=>({
+//   postId:state.postId,
+//   noOfComments:state.noOfComments
+// })
 
 export default Hoc(Home);

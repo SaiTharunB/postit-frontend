@@ -56,3 +56,16 @@
     background-color: white;
     border: none;
 }
+
+.comm-btn{
+    background-color:black
+}
+
+.comment-info{
+    color: black;
+    font-weight: 550;
+}
+
+.time{
+    font-size:8px
+}

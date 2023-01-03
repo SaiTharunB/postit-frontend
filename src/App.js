@@ -11,10 +11,10 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Home />}></Route>
-          <Route path="/signup" element={<SignUp />}></Route>
-          <Route path="/post" element={<CreatePost/>}></Route>
-          <Route path="*" element={<NoPageFound />}></Route>
+          <Route path="/" element={<Home key="home"/>}></Route>
+          <Route path="/signup" element={<SignUp key="signup"/>}></Route>
+          <Route path="/post" element={<CreatePost key="cp"/>}></Route>
+          <Route path="*" element={<NoPageFound key="np"/>}></Route>
         </Routes>
       </BrowserRouter>
     </div>
