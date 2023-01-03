@@ -1,5 +1,4 @@
 import React, {  useState } from 'react';
-import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import "../CSS/Home.css";
 
@@ -18,14 +17,9 @@ const Error = (props) =>  {
         </Modal.Header>
         <Modal.Body>
           <div className='error-msg'>
-          {props.msg.message}
+          {props.msg.message === undefined ? JSON.stringify(props.msg) : props.msg.message}
           </div>
         </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-        </Modal.Footer>
       </Modal>
     </>
   );

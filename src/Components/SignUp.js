@@ -3,6 +3,7 @@ import "../CSS/SignUp.css"
 import { useState } from 'react'
 import { isLoggedIn } from './AuthManager'
 import { useNavigate } from 'react-router-dom'
+import Error from "./Error"
 const SignUp = () => {
 
   const navigate =useNavigate()
@@ -13,6 +14,10 @@ const SignUp = () => {
     password:'',
     contact:''
   })
+
+  const [showError,setShowError] = useState(false)
+
+  const [msg,setMsg] = useState('')
 
   const changeHandler = (e) =>{
     setData({...data,[e.target.name]:e.target.value})
@@ -36,7 +41,7 @@ const SignUp = () => {
       else 
       {
         // console.log(data)
-        await saveUser()
+        saveUser()
       }
   }
 
@@ -51,7 +56,15 @@ const SignUp = () => {
         .then((response) => response.json())
         .then((resp) => {
           // console.log('SignUp Succesful');
+          if(resp.id===undefined){
+            console.log(resp)
+            setShowError(true)
+            setMsg(resp)
+          }
+          else{
+            alert("SignUp Succesful..!")
           navigate("/")
+          }
         })
         .catch((error) => {
           console.error('SignUp Failed', error);
@@ -92,6 +105,10 @@ const SignUp = () => {
     <div>BAD REQUEST</div>
 
     }
+          {showError ?
+      <Error msg={msg}/>:
+      <div></div>
+}
     </div>
   )
 }

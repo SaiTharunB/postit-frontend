@@ -13,7 +13,6 @@ const Home = () => {
   const [loading,setLoading] = useState(true)
   const [noOfElements,setNoOfElements] = useState(0)
   const [noOfPages,setNoOfPages] = useState(0)
-  const flag=false
   const userDetails = getUserDetails()
 
   const respHandler = (response) =>{

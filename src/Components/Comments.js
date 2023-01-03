@@ -101,11 +101,11 @@ const fetchComments = async()=>{
 const changeHandler = (e) =>{
     setComment({...comment,[e.target.name]:e.target.value})
 }
-const getDate = (date) =>{
-  let temp= date.split("T")
-  let time=temp[1].split(":")
-  return temp[0] + " " + time[0] + ":" + time[1]
-}
+// const getDate = (date) =>{
+//   let temp= date.split("T")
+//   let time=temp[1].split(":")
+//   return temp[0] + " " + time[0] + ":" + time[1]
+// }
 
   return (
     <>
