@@ -3,6 +3,8 @@ import "../CSS/Login.css"
 import {Link} from "react-router-dom"
 import { useState } from 'react'
 import { saveUser } from './AuthManager'
+import Error from "./Error"
+import "../CSS/Home.css"
 
 const Login = () => {
 
@@ -14,6 +16,10 @@ const Login = () => {
   const changeHandler = (e) =>{
     setData({...data,[e.target.name]:e.target.value})
   }
+
+  const [showError,setShowError] = useState(false)
+
+  const [msg,setMsg] = useState('')
 
   const clickHandler = async(e) =>{
       // e.preventDefault();
@@ -28,7 +34,7 @@ const Login = () => {
       else 
       {
         // console.log(data)
-        await loginUser()
+        loginUser()
       }
   }
 
@@ -42,11 +48,15 @@ const Login = () => {
       })
         .then((response) => response.text())
         .then((resp) => {
-          // console.log('Login Succesful');
-          // console.log(resp)
+          if(resp.match(/^[0-9a-z]+$/)){
           let obj={username:data.username,token:resp}
           saveUser(obj)
           window.location.reload(false);
+          }
+          else{
+            setShowError(true)
+            setMsg(JSON.parse(resp))
+          }
         })
         .catch((error) => {
           console.error('Login Failed:', error);
@@ -76,7 +86,10 @@ const Login = () => {
             New to PostIt? <Link to="/signup" replace>Sign Up</Link>
           </div>
       </div>
-
+      {showError ?
+      <Error msg={msg}/>:
+      <div></div>
+}
     </div>
   )
 }

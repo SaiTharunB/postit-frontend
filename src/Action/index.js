@@ -9,3 +9,10 @@ export const resetuserdetails = () => async dispatch =>{
         type:"RESET_USER_DETAILS",
     })
 }
+
+export const setshowerror = (value) => async dispatch =>{
+    dispatch({
+        type:"SETSHOWERROR",
+        payload:value
+    })
+}

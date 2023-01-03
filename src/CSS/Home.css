@@ -69,3 +69,8 @@
 .time{
     font-size:8px
 }
+
+.error-msg{
+    color: red;
+    font-size:medium
+}
