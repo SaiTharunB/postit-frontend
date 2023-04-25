@@ -5,7 +5,7 @@ import { useState } from 'react'
 import { saveUser } from './AuthManager'
 import Error from "./Error"
 import "../CSS/Home.css"
-
+import { URI } from './backend'
 const Login = () => {
 
   const [data,setData] = useState({
@@ -39,7 +39,7 @@ const Login = () => {
   }
 
   const loginUser = () =>{
-    fetch("http://150.136.139.228:8080/user/login", {
+    fetch(URI+":8080/user/login", {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

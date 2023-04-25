@@ -1,0 +1,1 @@
+export const URI = "http://ec2-44-201-224-101.compute-1.amazonaws.com"

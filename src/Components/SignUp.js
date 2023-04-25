@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { isLoggedIn } from './AuthManager'
 import { useNavigate } from 'react-router-dom'
 import Error from "./Error"
+import { URI } from './backend'
 const SignUp = () => {
 
   const navigate =useNavigate()
@@ -46,7 +47,7 @@ const SignUp = () => {
   }
 
   const saveUser = () =>{
-    fetch("http://150.136.139.228:8080/user", {
+    fetch(URI+":8080/user", {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

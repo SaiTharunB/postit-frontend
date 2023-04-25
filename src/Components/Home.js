@@ -5,6 +5,7 @@ import Hoc from "./Hoc"
 import "../CSS/Home.css"
 import { getUserDetails } from './AuthManager'
 import { BsHandThumbsUp, BsHandThumbsUpFill } from "react-icons/bs";
+import { URI } from './backend'
 // import {connect} from "react-redux"
 // import commentsreducer from "../Reducer/commentsreducer"
 
@@ -23,7 +24,7 @@ const Home = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      await fetch("http://150.136.139.228:8080/post",
+      await fetch(URI+":8080/post",
       {
         method: 'GET',
         headers: {

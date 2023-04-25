@@ -5,6 +5,7 @@ import Hoc from "./Hoc"
 import "../CSS/Home.css"
 import { getUserDetails } from './AuthManager'
 import { BsHandThumbsUp, BsHandThumbsUpFill } from "react-icons/bs";
+import { URI } from './backend'
 
 const MyPosts = () => {
   const [posts,setPosts] = useState([])
@@ -19,7 +20,7 @@ const MyPosts = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      await fetch("http://150.136.139.228:8080/post/my",
+      await fetch(URI+":8080/post/my",
       {
         method: 'GET',
         headers: {
@@ -46,7 +47,7 @@ const MyPosts = () => {
     })
     setPosts(tempPosts)
     tempPosts=[]
-    await  fetch("http://150.136.139.228:8080/like/"+entityId+"?type=post", {
+    await  fetch(URI+":8080/like/"+entityId+"?type=post", {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

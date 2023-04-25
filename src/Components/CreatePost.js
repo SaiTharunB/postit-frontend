@@ -3,6 +3,7 @@ import "../CSS/SignUp.css"
 import Header from "./Header"
 import Hoc from "./Hoc"
 import {getUserDetails} from "./AuthManager"
+import { URI } from './backend'
 const CreatePost = () => {
 
     const userDetails = getUserDetails()
@@ -24,7 +25,7 @@ const CreatePost = () => {
             alert("body should not be blank")
         }
         else{
-            await fetch("http://150.136.139.228:8080/post",{
+            await fetch(URI+":8080/post",{
                 method:'POST',
                 headers:{
                     'Content-Type': 'application/json',

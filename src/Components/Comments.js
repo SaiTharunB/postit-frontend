@@ -8,8 +8,7 @@ import { BsHandThumbsUp, BsHandThumbsUpFill } from 'react-icons/bs';
 import {AiOutlineDelete} from "react-icons/ai"
 import Error from "./Error"
 import "../CSS/Home.css"
-
-
+import { URI } from './backend';
 
 const Comments = (props) =>  {
   const [show, setShow] = useState(false);
@@ -42,7 +41,7 @@ const Comments = (props) =>  {
   setTimeout(() => setLoading(false), 5000);
 
 const fetchComments = async()=>{
-    await fetch("http://150.136.139.228:8080/comment/"+props.id,{
+    await fetch(URI+":8080/comment/"+props.id,{
     method:"GET",
     headers:{
         'username':userDetails.username,
@@ -62,7 +61,7 @@ const fetchComments = async()=>{
         alert("comment should not be blank")
     }
     else{
-        await fetch("http://150.136.139.228:8080/comment",{
+        await fetch(URI+":8080/comment",{
             method:'POST',
             headers:{
                 'Content-Type': 'application/json',
@@ -95,7 +94,7 @@ const fetchComments = async()=>{
     })
     setComments(tempComms)
     tempComms=[]
-    await  fetch("http://150.136.139.228:8080/like/"+entityId+"?type=comment", {
+    await  fetch(URI+":8080/like/"+entityId+"?type=comment", {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -106,7 +105,7 @@ const fetchComments = async()=>{
   }
 
   const deleteComment = async(id) =>{
-    await  fetch("http://150.136.139.228:8080/comment/"+id, {
+    await  fetch(URI+"/comment/"+id, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
